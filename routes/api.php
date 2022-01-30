@@ -16,8 +16,8 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+// Auht routes
 Route::group([
-
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
@@ -25,4 +25,13 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
+});
+
+// User routes
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'user'
+], function ($router) {
+    Route::get('find/{id}', [UserController::class, 'getUser']);
+    Route::get('search', [UserController::class, 'searchUsers']);
 });

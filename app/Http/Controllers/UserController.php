@@ -28,4 +28,27 @@ class UserController extends Controller
         }
         return $user;
     }
+
+    function searchUsers(Request $req)
+    {
+        $query = User::query();
+
+        $perPage = $req->input('size', 10);
+        $page = $req->input('page', 1);
+        $total = $query->count();
+
+        $result = $query->offset(($page - 1) * $perPage)->limit($perPage)->get();
+
+        return [
+            'result' => $result,
+            'total' => $total,
+            'page' => $page,
+            'last_page' => ceil($total / $perPage)
+        ];
+    }
+
+    function getUser(Request $req)
+    {
+        return User::where('id', $req->id)->first();
+    }
 }
