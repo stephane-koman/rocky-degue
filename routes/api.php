@@ -16,12 +16,18 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// Auht routes
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
     Route::post('login', [AuthController::class, 'login']);
+});
+
+// Auht routes
+Route::group([
+    'middleware' => 'jwt.verify',
+    'prefix' => 'auth'
+], function ($router) {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
@@ -29,7 +35,7 @@ Route::group([
 
 // User routes
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'jwt.verify',
     'prefix' => 'user'
 ], function ($router) {
     Route::get('find/{id}', [UserController::class, 'getUser']);
