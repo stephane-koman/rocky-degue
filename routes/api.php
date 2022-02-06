@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\AuthController;
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
-], function ($router) {
+], function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
@@ -27,17 +28,41 @@ Route::group([
 Route::group([
     'middleware' => 'jwt.verify',
     'prefix' => 'auth'
-], function ($router) {
+], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('me', [AuthController::class, 'me']);
+    Route::get('me', [AuthController::class, 'me']);
 });
 
 // User routes
 Route::group([
     'middleware' => 'jwt.verify',
     'prefix' => 'user'
-], function ($router) {
-    Route::get('find/{id}', [UserController::class, 'getUser']);
+], function () {
+    Route::get('find/{id}', [UserController::class, 'findById']);
     Route::get('search', [UserController::class, 'searchUsers']);
+    Route::post('add', [UserController::class, 'create']);
+    Route::put('update/{id}', [UserController::class, 'update']);
+    Route::get('me', [UserController::class, 'me']);
+});
+
+// Role routes
+Route::group([
+    'middleware' => 'jwt.verify',
+    'prefix' => 'role'
+], function () {
+    Route::get('all', [RoleController::class, 'findAll']);
+    Route::get('find/{id}', [RoleController::class, 'findById']);
+    Route::get('search', [RoleController::class, 'searchRoles']);
+    Route::post('add', [RoleController::class, 'create']);
+    Route::put('update/{id}', [RoleController::class, 'update']);
+});
+
+// Permission routes
+Route::group([
+    'middleware' => 'jwt.verify',
+    'prefix' => 'permission'
+], function () {
+    Route::get('all', [PermissionController::class, 'findAll']);
+    Route::get('search', [PermissionController::class, 'searchPermissions']);
 });
