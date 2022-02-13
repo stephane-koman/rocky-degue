@@ -24,8 +24,8 @@ class PermissionSeeder extends Seeder
                 'description' => 'Add user'
             ],
             [
-                'name' => 'update_user',
-                'description' => 'Update user'
+                'name' => 'edit_user',
+                'description' => 'Edit user'
             ],
             [
                 'name' => 'delete_user',
@@ -40,8 +40,8 @@ class PermissionSeeder extends Seeder
                 'description' => 'Add role'
             ],
             [
-                'name' => 'update_role',
-                'description' => 'Update role'
+                'name' => 'edit_role',
+                'description' => 'Edit role'
             ],
             [
                 'name' => 'delete_role',

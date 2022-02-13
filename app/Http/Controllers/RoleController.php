@@ -75,16 +75,24 @@ class RoleController extends Controller
     {
         $roles = Role::with('permissions');
 
+        if ($req->input('text_search')) {
+            $roles->where('name', 'like', '%' . $req->input(
+                'text_search'
+            ) . '%')->orWhere('description', 'like', '%' . $req->input('text_search') . '%');
+        }
+
         if ($req->input('name')) {
-            $roles->where('name', 'like', '%' + $req->input('name') + '%');
+            $roles->where('name', 'like', '%' . $req->input('name') . '%');
         }
 
         if ($req->input('description')) {
-            $roles->where('description', 'like', '%' + $req->input('description') + '%');
+            $roles->where('description', 'like', '%' . $req->input('description') . '%');
         }
 
         if ($req->input('sort')) {
-            $roles->orderBy($req->input('sort'));
+            $sorts = explode(".", $req->input('sort'));
+            $sens = $sorts[1] == "ascend" ? "asc" : "desc";
+            $roles->orderBy($sorts[0], $sens);
         }
 
         return $roles->paginate(

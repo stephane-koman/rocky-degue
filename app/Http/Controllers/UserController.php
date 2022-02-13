@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Symfony\Component\Console\Output\ConsoleOutput;
 
 class UserController extends Controller
 {
@@ -60,6 +59,8 @@ class UserController extends Controller
             $user->name = $req->name;
             $user->email = $req->email;
             $user->password = Hash::make($req->password);
+            
+            $user->save();
 
             if ($req->role && !empty($req->role)) {
                 $user->role()->associate($req->role);
@@ -134,15 +135,24 @@ class UserController extends Controller
     {
         $users = User::with('role', 'permissions');
 
-        $out = new ConsoleOutput();
+        if ($req->input('text_search')) {
+            $users->where('name', 'like', '%' . $req->input(
+                'text_search'
+            ) . '%')->orWhere('email', 'like', '%' . $req->input('text_search') . '%');
+        }
 
         if ($req->input('name')) {
-            $out->writeln($req->input('name'));
             $users->where('name', 'like', '%' . $req->input('name') . '%');
         }
 
         if ($req->input('email')) {
             $users->where('email', 'like', '%' . $req->input('email') . '%');
+        }
+
+        if ($req->input('role') && !empty($req->input('role'))) {
+            $users->whereHas("role", function($query) use ($req){
+                $query->whereIn("name", $req->input('role'));
+            });
         }
 
         if ($req->input('sort')) {

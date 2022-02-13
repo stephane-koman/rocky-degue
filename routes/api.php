@@ -43,6 +43,8 @@ Route::group([
     Route::get('search', [UserController::class, 'searchUsers']);
     Route::post('add', [UserController::class, 'create']);
     Route::put('update/{id}', [UserController::class, 'update']);
+    Route::put('reset_password/{id}', [UserController::class, 'resetPassword']);
+    Route::delete('{id}', [UserController::class, 'delete']);
     Route::get('me', [UserController::class, 'me']);
 });
 
@@ -56,6 +58,7 @@ Route::group([
     Route::get('search', [RoleController::class, 'searchRoles']);
     Route::post('add', [RoleController::class, 'create']);
     Route::put('update/{id}', [RoleController::class, 'update']);
+    Route::delete('{id}', [RoleController::class, 'delete']);
 });
 
 // Permission routes
