@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 
@@ -40,7 +42,7 @@ Route::group([
     'prefix' => 'user'
 ], function () {
     Route::get('find/{id}', [UserController::class, 'findById']);
-    Route::get('search', [UserController::class, 'searchUsers']);
+    Route::get('search', [UserController::class, 'search']);
     Route::post('add', [UserController::class, 'create']);
     Route::put('update/{id}', [UserController::class, 'update']);
     Route::put('reset_password/{id}', [UserController::class, 'resetPassword']);
@@ -55,7 +57,7 @@ Route::group([
 ], function () {
     Route::get('all', [RoleController::class, 'findAll']);
     Route::get('find/{id}', [RoleController::class, 'findById']);
-    Route::get('search', [RoleController::class, 'searchRoles']);
+    Route::get('search', [RoleController::class, 'search']);
     Route::post('add', [RoleController::class, 'create']);
     Route::put('update/{id}', [RoleController::class, 'update']);
     Route::delete('{id}', [RoleController::class, 'delete']);
@@ -67,5 +69,31 @@ Route::group([
     'prefix' => 'permission'
 ], function () {
     Route::get('all', [PermissionController::class, 'findAll']);
-    Route::get('search', [PermissionController::class, 'searchPermissions']);
+    Route::get('search', [PermissionController::class, 'search']);
+});
+
+// Country routes
+Route::group([
+    'middleware' => 'jwt.verify',
+    'prefix' => 'country'
+], function () {
+    Route::get('all', [CountryController::class, 'findAll']);
+    Route::get('find/{id}', [CountryController::class, 'findById']);
+    Route::get('search', [CountryController::class, 'search']);
+    Route::post('add', [CountryController::class, 'create']);
+    Route::put('update/{id}', [CountryController::class, 'update']);
+    Route::delete('{id}', [CountryController::class, 'delete']);
+});
+
+// City routes
+Route::group([
+    'middleware' => 'jwt.verify',
+    'prefix' => 'city'
+], function () {
+    Route::get('all', [CityController::class, 'findAll']);
+    Route::get('find/{id}', [CityController::class, 'findById']);
+    Route::get('search', [CityController::class, 'search']);
+    Route::post('add', [CityController::class, 'create']);
+    Route::put('update/{id}', [CityController::class, 'update']);
+    Route::delete('{id}', [CityController::class, 'delete']);
 });

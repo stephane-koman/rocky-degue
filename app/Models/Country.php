@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Country extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -14,7 +14,7 @@ class Role extends Model
 
     protected $fillable = [
         'name',
-        'description',
+        'code',
     ];
 
     protected $hidden = [
@@ -24,22 +24,11 @@ class Role extends Model
     protected $visible = [
         'id',
         'name',
-        'description',
-        'permissions'
+        'code',
     ];
 
-    public function users()
+    public function cities()
     {
-        return $this->hasMany(User::class);
-    }
-
-    public function permissions()
-    {
-        return $this->belongsToMany(
-            Permission::class,
-            'roles_permissions',
-            'role_id',
-            'permission_id'
-        );
+        return $this->hasMany(City::class);
     }
 }

@@ -71,7 +71,7 @@ class RoleController extends Controller
         return $role->delete();
     }
 
-    function searchRoles(Request $req)
+    function search(Request $req)
     {
         $roles = Role::with('permissions');
 

@@ -65,6 +65,7 @@ class UserController extends Controller
             if ($req->role && !empty($req->role)) {
                 $user->role()->associate($req->role);
             }
+
             if ($req->permissions && !empty($req->permissions)) {
                 $user->permissions()->sync($req->permissions);
             }
@@ -91,8 +92,7 @@ class UserController extends Controller
             $user->email = $req->email;
 
             if ($req->role && !empty($req->role)) {
-                $role = Role::where('id', $req->role)->first();
-                $user->role()->associate($role);
+                $user->role()->associate($req->role);
             }
 
             $user->permissions()->sync($req->get('permissions', []));
@@ -131,7 +131,7 @@ class UserController extends Controller
         }
     }
 
-    function searchUsers(Request $req)
+    function search(Request $req)
     {
         $users = User::with('role', 'permissions');
 

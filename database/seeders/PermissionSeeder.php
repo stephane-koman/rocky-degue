@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         DB::table('permissions')->insert([
-            [
+            /* [
                 'name' => 'show_user',
                 'description' => 'Show user'
             ],
@@ -50,7 +50,39 @@ class PermissionSeeder extends Seeder
             [
                 'name' => 'show_permission',
                 'description' => 'Show permission'
-            ]
+            ], */
+            [
+                'name' => 'show_country',
+                'description' => 'Show country'
+            ],
+            [
+                'name' => 'add_country',
+                'description' => 'Add country'
+            ],
+            [
+                'name' => 'edit_country',
+                'description' => 'Edit country'
+            ],
+            [
+                'name' => 'delete_country',
+                'description' => 'Delete country'
+            ],
+            [
+                'name' => 'show_city',
+                'description' => 'Show city'
+            ],
+            [
+                'name' => 'add_city',
+                'description' => 'Add city'
+            ],
+            [
+                'name' => 'edit_city',
+                'description' => 'Edit city'
+            ],
+            [
+                'name' => 'delete_city',
+                'description' => 'Delete city'
+            ],
         ]);
     }
 }

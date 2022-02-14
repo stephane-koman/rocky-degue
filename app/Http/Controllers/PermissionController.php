@@ -12,7 +12,7 @@ class PermissionController extends Controller
         return Permission::all();
     }
 
-    function searchPermissions(Request $req){
+    function search(Request $req){
         $permissions = Permission::query();
 
         if ($req->input('name')) {
