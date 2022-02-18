@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Country extends Model
+class PaymentType extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -26,14 +26,4 @@ class Country extends Model
         'code',
         'name',
     ];
-
-    public function cities()
-    {
-        return $this->hasMany(City::class);
-    }
-
-    public function customers()
-    {
-        return $this->hasMany(Customer::class);
-    }
 }

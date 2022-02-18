@@ -51,7 +51,7 @@ class PermissionSeeder extends Seeder
                 'name' => 'show_permission',
                 'description' => 'Show permission'
             ], */
-            [
+            /* [
                 'name' => 'show_country',
                 'description' => 'Show country'
             ],
@@ -82,6 +82,38 @@ class PermissionSeeder extends Seeder
             [
                 'name' => 'delete_city',
                 'description' => 'Delete city'
+            ], */
+            /* [
+                'name' => 'show_customer',
+                'description' => 'Show customer'
+            ],
+            [
+                'name' => 'add_customer',
+                'description' => 'Add customer'
+            ],
+            [
+                'name' => 'edit_customer',
+                'description' => 'Edit customer'
+            ],
+            [
+                'name' => 'delete_customer',
+                'description' => 'Delete customer'
+            ], */
+            [
+                'name' => 'show_payment_type',
+                'description' => 'Show payment type'
+            ],
+            [
+                'name' => 'add_payment_type',
+                'description' => 'Add payment type'
+            ],
+            [
+                'name' => 'edit_payment_type',
+                'description' => 'Edit payment type'
+            ],
+            [
+                'name' => 'delete_payment_type',
+                'description' => 'Delete payment type'
             ],
         ]);
     }

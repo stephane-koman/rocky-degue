@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Country extends Model
+class Customer extends Model
 {
     use HasFactory, SoftDeletes;
 
     public $timestamps = false;
 
     protected $fillable = [
-        'code',
         'name',
+        'phone',
+        'address',
+        'email',
+        'description',
+        'country'
     ];
 
     protected $hidden = [
@@ -23,17 +27,16 @@ class Country extends Model
 
     protected $visible = [
         'id',
-        'code',
         'name',
+        'phone',
+        'address',
+        'email',
+        'description',
+        'country'
     ];
 
-    public function cities()
+    public function country()
     {
-        return $this->hasMany(City::class);
-    }
-
-    public function customers()
-    {
-        return $this->hasMany(Customer::class);
+        return $this->belongsTo(Country::class);
     }
 }

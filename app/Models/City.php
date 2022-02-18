@@ -34,4 +34,14 @@ class City extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function customers()
+    {
+        return $this->belongsToMany(
+            Customer::class,
+            'customers_cities',
+            'city_id',
+            'customer_id'
+        );
+    }
 }
